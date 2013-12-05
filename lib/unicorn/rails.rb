@@ -14,7 +14,6 @@ module Rack
             unicorn_options[:config_file] = "config/unicorn/#{environment}.rb"
           end
 
-          ::Unicorn::Launcher.daemonize!(unicorn_options) if options[:daemonize]
           ::Unicorn::HttpServer.new(app, unicorn_options).start.join
         end
 
