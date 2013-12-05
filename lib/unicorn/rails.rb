@@ -9,6 +9,7 @@ module Rack
           unicorn_options = {}
           unicorn_options[:listeners] = options.values_at(:Host, :Port).join(':')
           unicorn_options[:pid] = options[:Pid] if options[:pid]
+          unicorn_options[:worker_processes] = ENV['WORKERS'].to_i if ENV['WORKERS']
 
           if ::File.exist?("config/unicorn/#{environment}.rb")
             unicorn_options[:config_file] = "config/unicorn/#{environment}.rb"
